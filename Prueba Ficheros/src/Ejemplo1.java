@@ -7,7 +7,7 @@ public class Ejemplo1 {
 	public static void main(String[] args) {
 		DataOutputStream out = null;
 		try {
-			out = new DataOutputStream(new FileOutputStream("C:\\Users\\aula9\\Desktop\\datos\\prueba"));
+			out = new DataOutputStream(new FileOutputStream("C:\\Users\\aula9\\Desktop\\datos\\datos"));
 			out.writeInt(43291);
 			out.writeLong(91234239543213L);
 			out.writeBoolean(true);
