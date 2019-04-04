@@ -3,6 +3,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -12,7 +13,8 @@ public class Ejemplo3 {
 	public static void main(String[] args) {
 		DataInputStream in = null;
 		try {
-			in = new DataInputStream(new BufferedInputStream(new FileInputStream("C:\\Users\\aula9\\Desktop\\datos\\parrot.bmp")));
+			InputStream is = Ejemplo3.class.getResourceAsStream("saltamontes.bmp");
+			in = new DataInputStream(new BufferedInputStream(is));
 			String tipo = "";
 			tipo += (char) in.read();
 			tipo += (char) in.read();
@@ -43,12 +45,11 @@ public class Ejemplo3 {
 				for(int c=0; c<width; c++) {
 					int pixel = 0;
 					if(colorDepth == 24) {
-						pixel += in.read();
-						pixel += (in.read() << 8);
-						pixel += (in.read() << 16);
-						pixel += (in.read() << 24);
+						pixel |= in.read();
+						pixel |= (in.read() << 8);
+						pixel |= (in.read() << 16);
 						pixel |= 255 << 24;
-						pixel |= 0xff000000;
+//						pixel |= 0xff000000;
 					}else if (colorDepth ==32) {
 						pixel = Integer.reverseBytes(in.readInt() << 8);
 						pixel |= 255 << 24;
